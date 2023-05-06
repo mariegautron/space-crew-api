@@ -1,14 +1,16 @@
 import { Router, Request, Response } from "express";
 const router = Router();
-import Astronaut, { AstronautMap } from "../models/astronaut";
-import database from "../database";
+
+const prisma = require("../prisma");
 
 // GET - astronauts
 router.get("/", async (req: Request, res: Response) => {
-  // TO DO
-  AstronautMap(database);
-  const result = await Astronaut.findAll();
-  res.status(200).json({ astronauts: result });
+  try {
+    const astronauts = await prisma.astronauts.findMany();
+    return res.json(astronauts);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 });
 
 export default router;
