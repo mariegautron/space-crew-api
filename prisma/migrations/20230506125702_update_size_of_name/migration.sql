@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "astronauts" ALTER COLUMN "name" SET DATA TYPE VARCHAR(255);
+
+-- AlterTable
+ALTER TABLE "missions" ALTER COLUMN "name" SET DATA TYPE VARCHAR(255);

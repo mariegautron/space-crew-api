@@ -34,6 +34,7 @@ git clone https://github.com/mariegautron/space-crew-back-end.git
 Configurez les variables d'environnement en créant un fichier .env à la racine du projet :
 
 ```
+API_PORT=8080
 DATABASE_URL=postgres://votre-username:votre-mot-de-passe@db:5432/spacecrew
 ```
 

@@ -5,12 +5,16 @@ install:
 	docker-compose up -d db
 	docker-compose run --rm server npm install
 	make migrate
+	make fixtures
 
 prisma-init:
 	docker-compose run --rm server npx prisma init
 
 prisma-generate:
 	docker-compose run --rm server npx prisma generate
+
+fixtures:
+	docker-compose run --rm server npm run fixtures
 
 migrate:
 	docker-compose run --rm server npm run db:migrate
