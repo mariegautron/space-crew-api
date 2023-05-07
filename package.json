@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/src/index.js",
     "dev": "nodemon src/index.ts",
     "build": "tsc -p .",
     "init:prima": "npx prisma init",
     "db:pull": "npx prisma db pull",
+    "db:reset": "npx prisma migrate reset",
     "db:migrate": "npx prisma migrate dev",
     "fixtures": "npx prisma db seed"
   },
@@ -32,6 +33,9 @@
     "schema": "prisma/schema.prisma",
     "seed": "ts-node prisma/seeds/index.ts"
   },
+  "engines": {
+    "node": ">=14.18"
+  },  
   "dependencies": {
     "@prisma/client": "^4.13.0",
     "body-parser": "^1.20.2",

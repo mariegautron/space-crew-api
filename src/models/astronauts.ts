@@ -35,3 +35,12 @@ export async function getAstronauts(
     throw new Error("An unknown error occurred.");
   }
 }
+
+export async function deleteAstronaut(id: number) {
+  const astronaut = await prisma.astronauts.delete({
+    where: {
+      id: id,
+    },
+  });
+  return astronaut;
+}

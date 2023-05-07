@@ -8,6 +8,14 @@ Le projet a été créé pour aider les entreprises spatiales et les agences gou
 
 Nous espérons que vous apprécierez cette application et que vous trouverez toutes les fonctionnalités dont vous avez besoin pour gérer efficacement votre équipage spatial.
 
+Lien du repo front-end : https://github.com/mariegautron/space-crew-front
+
+## 🚀 Déploiement
+
+L'api NodeJS et la base de données GraphQL sont déployées avec [Render](https://render.com/) à l'adresse suivante : https://space-crew-api.onrender.com/ 
+
+:warning: Étant donné que c'est la version gratuite, d'important ralentissement peuvent être présents.
+
 ## 👨‍💻 Technologies utilisées
 
 - [NodeJS](https://nodejs.org/en/docs) - un environnement d'exécution JavaScript côté serveur, qui permet d'utiliser du code JavaScript en dehors d'un navigateur web.
@@ -48,3 +56,34 @@ make install start
 
 
 Accédez à l'application à l'adresse suivante : http://localhost:8080.
+
+## 📁 Structure des fichiers
+
+La structure de fichiers de ce projet suit une architecture de type MVC (Modèle-Vue-Contrôleur) pour organiser et séparer les différentes parties de l'application.
+
+- **prisma** : ce dossier contient les fichiers nécessaires pour interagir avec la base de données à l'aide de Prisma. Il contient les migrations, les fichiers de fixtures pour la base de données et le schéma de données défini dans schema.prisma.
+- **src/controllers** :  contient les contrôleurs de l'application, qui reçoivent les requêtes HTTP des utilisateurs, traitent ces requêtes en utilisant les modèles appropriés, et renvoient les réponses correspondantes. Les contrôleurs sont responsables de la logique métier de l'application et utilisent les modèles pour effectuer les opérations CRUD.
+- **src/models** : contient les modèles de données de l'application, qui interagissent avec la base de données. Chaque fichier dans ce dossier est responsable d'une table de la base de données, et définit les fonctions pour effectuer des opérations CRUD (Create, Read, Update, Delete) sur cette table avec Prisma.
+- **src/routes** : ce dossier contient les fichiers de définition des routes pour chaque type de ressource, comme les astronautes, les missions et les équipages.ma.
+
+Cette structure permet une organisation claire et cohérente du code, en séparant les différents types de fichiers en fonction de leur rôle dans l'application.
+
+## Roadmap
+
+### Features
+
+- [x] Liste des astronautes
+- [ ] Ajouter un astronaute
+- [ ] Modifier un astronaute
+- [x] Suprimer un astronaute
+- [ ] Rechercher un astronaute (par nom ou mission)
+- [ ] Filtrer la liste d'astronautes (astronautes sans mission)
+- [ ] Affecter/supprimer une mission à un astronaute
+- [ ] S'inscrire/se connecter pour manipuler les astronautes
+
+
+### Autre
+
+- [ ] Linter/Formatter
+- [ ] Tests
+- [ ] Lancer front & back en une seule commande (Git submodules ?)
