@@ -4,6 +4,7 @@ install:
 	docker-compose build
 	docker-compose up -d db
 	docker-compose run --rm server npm install
+	npx prisma migrate reset
 	make migrate
 	make fixtures
 

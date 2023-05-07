@@ -30,7 +30,7 @@
   },
   "prisma": {
     "schema": "prisma/schema.prisma",
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seeds/index.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.13.0",

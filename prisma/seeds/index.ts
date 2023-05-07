@@ -1,40 +1,11 @@
 import { PrismaClient } from "@prisma/client";
+import { missions } from "./missions";
+import { astronauts } from "./astronauts";
 
 const prisma = new PrismaClient();
 
-async function main() {
+async function main(): Promise<void> {
   console.log("Start seeding ...");
-
-  const missions = [
-    {
-      name: "Course-poursuite autour de la Lune",
-    },
-    {
-      name: "Collecte d'échantillons sur Mars",
-    },
-    {
-      name: "Installation d'une base lunaire permanente",
-    },
-  ];
-
-  const astronauts = [
-    {
-      name: "Buzz Lightbeer",
-      missionId: 1,
-    },
-    {
-      name: "Sandra Stardust",
-      missionId: 2,
-    },
-    {
-      name: "Yuri Gagarlic",
-      missionId: 3,
-    },
-    {
-      name: "Neil Armstraw",
-      missionId: 1,
-    },
-  ];
 
   for (const mission of missions) {
     const createdMission = await prisma.missions.create({
@@ -54,7 +25,7 @@ async function main() {
 }
 
 main()
-  .catch((error) => {
+  .catch((error: Error) => {
     console.error(error);
     process.exit(1);
   })
