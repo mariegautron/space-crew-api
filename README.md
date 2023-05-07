@@ -1,5 +1,7 @@
 # 🚀 Space Crew Back-end
 
+<p><img src="https://img.shields.io/github/last-commit/mariegautron/el-anis-app.svg?style=flat-square" alt="shields"></p>
+
 Space Crew est une application web de gestion d'équipages spatiaux, conçue pour aider les administrateurs à suivre les membres d'équipage assignés à chaque mission. LE back-end est conçu avec NodeJS, Express, Prisma et TypeScript, avec une base de données PostgreSQL.
 
 Le projet a été créé pour aider les entreprises spatiales et les agences gouvernementales à mieux gérer leurs équipages d'astronautes. Avec une interface simple et facile à utiliser, Space Crew est la solution idéale pour les missions spatiales de toutes tailles.
