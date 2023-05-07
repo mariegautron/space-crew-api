@@ -1,16 +1,23 @@
-// src/index.ts
 import http from "http";
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import bodyParser from "body-parser";
-import { Request, Response } from "express";
 import { port } from "./config";
 
 import astronautsRoutes from "./routes/astronauts.routes";
+
 const app = express();
 
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.get("/", async (req: Request, res: Response) => {
   res.status(200).json({
