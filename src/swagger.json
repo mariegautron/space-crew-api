@@ -79,7 +79,13 @@
             "description": "Astronaut object to be added",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Astronaut"
+              "type": "object",
+              "properties": {
+                "astronaut": {
+                  "$ref": "#/components/schemas/Astronaut"
+                }
+              },
+              "required": ["astronaut"]
             }
           }
         ],

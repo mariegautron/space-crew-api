@@ -43,6 +43,8 @@ export async function deleteAstronautController(req: Request, res: Response): Pr
 export async function addAstronautController(req: Request, res: Response): Promise<void> {
   const { astronaut } = req.body;
 
+  console.log('astronaut', astronaut);
+
   if (!astronaut || !isValidAstronaut(astronaut)) {
     res.status(400).json({ error: 'Invalid astronaut object in request body' });
     return;
