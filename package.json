@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/src/index.js",
     "dev": "nodemon src/index.ts",
-    "build": "tsc -p .",
+    "build": "tsc -p . && node_modules/cpy-cli/cli.js 'src/**/*.json' dist/src",
     "init:prima": "npx prisma init",
     "db:pull": "npx prisma db pull",
     "db:reset": "npx prisma migrate reset",
@@ -27,6 +27,8 @@
     "@types/node": "^18.16.3",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
+    "cpy": "^10.0.0",
+    "cpy-cli": "^4.2.0",
     "eslint": "^8.40.0",
     "husky": "^4.3.8",
     "lint-staged": "^13.2.2",
