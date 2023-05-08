@@ -1,5 +1,11 @@
 import { Request, Response } from 'express';
-import { AstronautsPagination, addAstronaut, deleteAstronaut, getAstronauts } from '../models/astronauts';
+import {
+  AstronautsPagination,
+  addAstronaut,
+  deleteAstronaut,
+  getAstronauts,
+  updateAstronaut,
+} from '../models/astronauts';
 import { isValidAstronaut } from '../utils/isValidAstronaut';
 
 export async function getAstronautsController(
@@ -42,9 +48,6 @@ export async function deleteAstronautController(req: Request, res: Response): Pr
 
 export async function addAstronautController(req: Request, res: Response): Promise<void> {
   const { astronaut } = req.body;
-
-  console.log('astronaut', astronaut);
-
   if (!astronaut || !isValidAstronaut(astronaut)) {
     res.status(400).json({ error: 'Invalid astronaut object in request body' });
     return;
@@ -56,5 +59,35 @@ export async function addAstronautController(req: Request, res: Response): Promi
   } catch (error) {
     console.error(`Failed to add astronaut: ${error}`);
     res.status(500).json({ error: 'Failed to add astronaut' });
+  }
+}
+
+export async function updateAstronautController(req: Request, res: Response): Promise<Response | Error> {
+  const { astronautId } = req.params;
+  const { astronaut } = req.body;
+
+  const astronautIdNumber = Number(astronautId);
+
+  if (!astronautId || isNaN(astronautIdNumber)) {
+    return res.status(400).json({
+      message: `${astronautId} ${isNaN(astronautIdNumber)} ${typeof astronautId}`,
+    });
+  }
+
+  if (!astronaut || !isValidAstronaut(astronaut)) {
+    return res.status(400).json({ error: 'Invalid astronaut object in request body' });
+  }
+
+  try {
+    const updatedAstronaut = await updateAstronaut(astronautIdNumber, astronaut);
+
+    if (updatedAstronaut === null) {
+      return res.status(404).json({ message: `Astronaut with ID ${astronautIdNumber} not found.` });
+    }
+
+    return res.status(200).json(updatedAstronaut);
+  } catch (error) {
+    console.error(`Failed to update astronaut: ${error}`);
+    return res.status(500).json({ error: 'Failed to update astronaut' });
   }
 }
