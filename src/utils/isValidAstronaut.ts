@@ -19,9 +19,5 @@ export function isValidAstronaut(astronaut: astronauts): boolean {
     return false;
   }
 
-  if (missionId !== undefined && typeof missionId !== 'number') {
-    return false;
-  }
-
   return true;
 }
