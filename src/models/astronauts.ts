@@ -37,10 +37,31 @@ export async function getAstronauts(
 }
 
 export async function deleteAstronaut(id: number) {
-  const astronaut = await prisma.astronauts.delete({
-    where: {
-      id: id,
-    },
-  });
-  return astronaut;
+  try {
+    const astronaut = await prisma.astronauts.delete({
+      where: {
+        id: id,
+      },
+    });
+    return astronaut;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error('An unknown error occurred.');
+  }
+}
+
+export async function addAstronaut(astronaut: astronauts) {
+  try {
+    const newAstronaut = await prisma.astronauts.create({
+      data: { ...astronaut },
+    });
+    return newAstronaut;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error('An unknown error occurred.');
+  }
 }

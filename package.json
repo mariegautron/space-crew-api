@@ -15,9 +15,7 @@
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix",
     "pretty": "prettier --write \"src/**/*.ts\"",
-    "clean:code": "npm run format && npm run pretty",
-    "precommit": "npm run lint-staged && npm run clean:code",
-    "prepare": "husky install"
+    "clean:code": "npm run format && npm run pretty"
   },
   "keywords": [],
   "author": "",

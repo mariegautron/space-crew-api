@@ -1,10 +1,12 @@
 import express, { Router } from 'express';
-import { deleteAstronautController, getAstronautsController } from '../controllers/astronauts';
+import { addAstronautController, deleteAstronautController, getAstronautsController } from '../controllers/astronauts';
 
 const router: Router = express.Router();
 
 router.get('/', getAstronautsController);
 
 router.delete('/:astronautId', deleteAstronautController);
+
+router.post('/', addAstronautController);
 
 export default router;

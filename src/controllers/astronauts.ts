@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { getAstronauts, AstronautsPagination, deleteAstronaut } from '../models/astronauts';
+import { getAstronauts, AstronautsPagination, deleteAstronaut, addAstronaut } from '../models/astronauts';
+import { astronauts } from '@prisma/client';
 
 export async function getAstronautsController(
   req: Request,
@@ -29,6 +30,17 @@ export async function deleteAstronautController(req: Request, res: Response): Pr
   try {
     await deleteAstronaut(astronautIdNumber);
     return res.status(204).json({ message: `${astronautIdNumber} is deleted.` });
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
+
+export async function addAstronautController(req: Request, res: Response): Promise<Response | Error> {
+  const { astronaut } = req.body;
+
+  try {
+    const data = await addAstronaut(astronaut);
+    return res.json(data);
   } catch (error) {
     return res.status(500).json(error);
   }
