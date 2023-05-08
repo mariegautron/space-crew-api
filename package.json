@@ -11,7 +11,13 @@
     "db:pull": "npx prisma db pull",
     "db:reset": "npx prisma migrate reset",
     "db:migrate": "npx prisma migrate dev",
-    "fixtures": "npx prisma db seed"
+    "fixtures": "npx prisma db seed",
+    "lint": "eslint src/**/*.ts",
+    "format": "eslint src/**/*.ts --fix",
+    "pretty": "prettier --write \"src/**/*.ts\"",
+    "clean:code": "npm run format && npm run pretty",
+    "precommit": "npm run lint-staged && npm run clean:code",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +27,13 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.17",
     "@types/node": "^18.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.2",
+    "@typescript-eslint/parser": "^5.59.2",
+    "eslint": "^8.40.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^13.2.2",
     "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
     "prisma": "^4.13.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
@@ -29,13 +41,24 @@
     "tsup": "^6.7.0",
     "typescript": "^5.0.4"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run clean:code"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "npm run clean:code",
+      "git add"
+    ]
+  },
   "prisma": {
     "schema": "prisma/schema.prisma",
     "seed": "ts-node prisma/seeds/index.ts"
   },
   "engines": {
     "node": ">=14.18"
-  },  
+  },
   "dependencies": {
     "@prisma/client": "^4.13.0",
     "body-parser": "^1.20.2",
