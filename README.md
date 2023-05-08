@@ -86,6 +86,12 @@ npm run pretty // Formatter
 npm run clean:code // format && pretry
 ```
 
+## 🔍 Tests
+
+Le dossier `tests` à la racine du projet contient les tests unitaires de l'application. Les tests sont écrits en utilisant le framework de test [Jest](https://jestjs.io/fr/).
+
+Pour exécuter les tests, assurez-vous d'avoir installé les dépendances du projet avec la commande npm install ou yarn install. Ensuite, exécutez la commande `npm test` ou `yarn test`.
+
 ## Roadmap
 
 ### Features
@@ -102,6 +108,6 @@ npm run clean:code // format && pretry
 ### Autre
 
 - [x] Linter/Formatter
-- [ ] Tests
+- [x] Tests
 - [x] Swagger
 - [ ] Lancer front & back en une seule commande (Git submodules ?)
