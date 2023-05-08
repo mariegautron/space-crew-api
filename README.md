@@ -101,4 +101,5 @@ npm run clean:code // format && pretry
 
 - [x] Linter/Formatter
 - [ ] Tests
+- [x] Swagger
 - [ ] Lancer front & back en une seule commande (Git submodules ?)
