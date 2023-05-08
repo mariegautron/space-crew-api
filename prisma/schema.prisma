@@ -10,15 +10,16 @@ datasource db {
 
 model astronauts {
   id          Int       @id @default(autoincrement())
-  name        String?   @db.VarChar(255)
+  name        String    @db.VarChar(255)
   description String?
   pseudo      String?
-  imageUrl    String?
+  imageUrl    String    @db.VarChar(255)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @default(now()) @updatedAt
   mission     missions? @relation(fields: [missionId], references: [id])
   missionId   Int?
 }
+
 
 model missions {
   id         Int          @id @default(autoincrement())
