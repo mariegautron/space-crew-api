@@ -14,6 +14,8 @@ Lien du repo front-end : https://github.com/mariegautron/space-crew-front
 
 L'api NodeJS et la base de données GraphQL sont déployées avec [Render](https://render.com/) à l'adresse suivante : https://space-crew-api.onrender.com/
 
+Vous pouvez consulter **la documentation de l'API via l'interface Swagger** en vous rendant sur https://space-crew-api.onrender.com/.
+
 :warning: Étant donné que c'est la version gratuite, d'important ralentissement peuvent être présents.
 
 ## 👨‍💻 Technologies utilisées
@@ -89,7 +91,7 @@ npm run clean:code // format && pretry
 ### Features
 
 - [x] Liste des astronautes
-- [ ] Ajouter un astronaute
+- [x] Ajouter un astronaute
 - [ ] Modifier un astronaute
 - [x] Suprimer un astronaute
 - [ ] Rechercher un astronaute (par nom ou mission)

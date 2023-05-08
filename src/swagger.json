@@ -16,24 +16,135 @@
   "paths": {
     "/astronauts": {
       "get": {
-        "description": "Récupère tous les astronautes",
+        "summary": "Get a list of astronauts",
         "tags": ["Astronaut"],
+
+        "description": "This endpoint returns a paginated list of astronauts",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page number to retrieve",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of results to return per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 9
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Succès",
+            "description": "A list of astronauts",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Astronaut"
-                  }
+                  "$ref": "#/components/schemas/AstronautsPagination"
                 }
               }
             }
           },
           "500": {
-            "description": "Erreur serveur"
+            "description": "An error occurred while processing the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new astronaut",
+        "tags": ["Astronaut"],
+        "description": "Add a new astronaut to the database",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Astronaut object to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Astronaut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Astronaut added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Astronaut"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid astronaut object in request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to add astronaut",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/astronauts/{astronautId}": {
+      "delete": {
+        "summary": "Delete an astronaut by ID",
+        "tags": ["Astronaut"],
+        "parameters": [
+          {
+            "name": "astronautId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the astronaut to delete",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Astronaut deleted successfully"
+          },
+          "400": {
+            "description": "Invalid astronaut ID provided"
+          },
+          "404": {
+            "description": "Astronaut not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -48,16 +159,22 @@
             "type": "integer"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "The name of the astronaut",
+            "required": true
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "description": "The description of the astronaut"
           },
           "pseudo": {
-            "type": "string"
+            "type": "string",
+            "description": "The pseudonym of the astronaut"
           },
           "imageUrl": {
-            "type": "string"
+            "type": "string",
+            "description": "The image URL of the astronaut",
+            "required": true
           },
           "createdAt": {
             "type": "string",
@@ -68,7 +185,33 @@
             "format": "date-time"
           },
           "missionId": {
+            "type": "integer",
+            "description": "The ID of the astronaut's mission"
+          }
+        }
+      },
+      "AstronautsPagination": {
+        "type": "object",
+        "properties": {
+          "astronauts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Astronaut"
+            }
+          },
+          "totalCount": {
             "type": "integer"
+          },
+          "totalPages": {
+            "type": "integer"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
           }
         }
       }

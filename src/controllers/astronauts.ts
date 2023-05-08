@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { getAstronauts, AstronautsPagination, deleteAstronaut, addAstronaut } from '../models/astronauts';
-import { astronauts } from '@prisma/client';
+import { AstronautsPagination, addAstronaut, deleteAstronaut, getAstronauts } from '../models/astronauts';
+import { isValidAstronaut } from '../utils/isValidAstronaut';
 
 export async function getAstronautsController(
   req: Request,
@@ -28,20 +28,31 @@ export async function deleteAstronautController(req: Request, res: Response): Pr
   }
 
   try {
-    await deleteAstronaut(astronautIdNumber);
+    const deletedAstronaut = await deleteAstronaut(astronautIdNumber);
+
+    if (deletedAstronaut === null) {
+      return res.status(404).json({ message: `Astronaut with ID ${astronautIdNumber} not found.` });
+    }
+
     return res.status(204).json({ message: `${astronautIdNumber} is deleted.` });
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(500).json({ message: `An error occurred while deleting the astronaut: ${error}` });
   }
 }
 
-export async function addAstronautController(req: Request, res: Response): Promise<Response | Error> {
+export async function addAstronautController(req: Request, res: Response): Promise<void> {
   const { astronaut } = req.body;
+
+  if (!astronaut || !isValidAstronaut(astronaut)) {
+    res.status(400).json({ error: 'Invalid astronaut object in request body' });
+    return;
+  }
 
   try {
     const data = await addAstronaut(astronaut);
-    return res.json(data);
+    res.json(data);
   } catch (error) {
-    return res.status(500).json(error);
+    console.error(`Failed to add astronaut: ${error}`);
+    res.status(500).json({ error: 'Failed to add astronaut' });
   }
 }
