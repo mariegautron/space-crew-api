@@ -17,15 +17,14 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.get('/', async (req: Request, res: Response) => {
-  res.status(200).json({
-    message: 'Hello World',
-  });
-});
+const swaggerUi = require('swagger-ui-express'),
+  swaggerDocument = require('./swagger.json');
 
 app.use('/astronauts', astronautsRoutes);
 
 const server = http.createServer(app);
+
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 server.listen(port, () => {
   console.log(`API started at http://localhost:${port}`);
