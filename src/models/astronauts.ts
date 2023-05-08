@@ -1,4 +1,4 @@
-import { PrismaClient, astronauts } from "@prisma/client";
+import { PrismaClient, astronauts } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -10,7 +10,7 @@ export interface AstronautsPagination {
 
 export async function getAstronauts(
   page: string | undefined,
-  limit: string | undefined
+  limit: string | undefined,
 ): Promise<AstronautsPagination> {
   const currentPageNumber = page ? parseInt(page) : 1;
   const resultsPerPage = limit ? parseInt(limit) : 9;
@@ -32,7 +32,7 @@ export async function getAstronauts(
     if (error instanceof Error) {
       throw new Error(error.message);
     }
-    throw new Error("An unknown error occurred.");
+    throw new Error('An unknown error occurred.');
   }
 }
 
