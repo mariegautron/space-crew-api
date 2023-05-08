@@ -65,3 +65,18 @@ export async function addAstronaut(astronaut: astronauts) {
     throw new Error('An unknown error occurred.');
   }
 }
+
+export async function updateAstronaut(id: number, updatedAstronaut: astronauts) {
+  try {
+    const updated = await prisma.astronauts.update({
+      where: { id },
+      data: { ...updatedAstronaut },
+    });
+    return updated;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error('An unknown error occurred.');
+  }
+}

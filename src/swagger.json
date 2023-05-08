@@ -153,6 +153,79 @@
             "description": "Internal server error"
           }
         }
+      },
+      "put": {
+        "summary": "Update an astronaut by ID",
+        "tags": ["Astronaut"],
+        "description": "Update an existing astronaut in the database by ID.",
+        "parameters": [
+          {
+            "name": "astronautId",
+            "in": "path",
+            "description": "ID of astronaut to update",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "New astronaut object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "astronaut": {
+                  "$ref": "#/components/schemas/Astronaut"
+                }
+              },
+              "required": ["astronaut"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Astronaut updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Astronaut"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid astronaut object in request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Astronaut with the specified ID not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An error occurred while processing the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
