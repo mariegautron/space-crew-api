@@ -1,6 +1,5 @@
-import { PrismaClient, astronauts } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { astronauts } from '@prisma/client';
+import prisma from '../prisma';
 
 export interface AstronautsPagination {
   astronauts: astronauts[];
