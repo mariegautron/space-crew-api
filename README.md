@@ -97,8 +97,9 @@ Pour exécuter les tests, assurez-vous d'avoir installé les dépendances du pro
 ### Features
 
 - [x] Liste des astronautes
+- [x] Récupérer un astronaute (par id)
 - [x] Ajouter un astronaute
-- [ ] Modifier un astronaute
+- [x] Modifier un astronaute
 - [x] Suprimer un astronaute
 - [ ] Rechercher un astronaute (par nom ou mission)
 - [ ] Filtrer la liste d'astronautes (astronautes sans mission)
