@@ -18,7 +18,7 @@ export async function getAstronautsController(
     const data = await getAstronauts(page as string | undefined, limit as string | undefined);
     return res.json(data);
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(500).json({ error: (error as Error).message });
   }
 }
 
@@ -47,9 +47,7 @@ export async function deleteAstronautController(req: Request, res: Response): Pr
 }
 
 export async function addAstronautController(req: Request, res: Response): Promise<void> {
-  console.log('req.body', req.body);
   const { astronaut } = req.body;
-  console.log('astronaut', astronaut);
   if (!astronaut || !isValidAstronaut(astronaut)) {
     res.status(400).json({ error: 'Invalid astronaut object in request body' });
   }
