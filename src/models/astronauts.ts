@@ -86,9 +86,6 @@ export async function getAstronautById(id: number): Promise<astronauts | null> {
       where: {
         id: id,
       },
-      include: {
-        mission: true,
-      },
     });
     return astronaut;
   } catch (error: unknown) {
