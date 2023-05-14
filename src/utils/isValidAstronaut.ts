@@ -1,7 +1,7 @@
 import { astronauts } from '@prisma/client';
 
 export function isValidAstronaut(astronaut: astronauts): boolean {
-  const { name, description, pseudo, imageUrl, missionId } = astronaut;
+  const { name, description, pseudo, imageUrl } = astronaut;
 
   if (!name || typeof name !== 'string') {
     return false;
