@@ -55,7 +55,7 @@ export async function deleteAstronaut(id: number) {
 export async function addAstronaut(astronaut: astronauts) {
   try {
     const newAstronaut = await prisma.astronauts.create({
-      data: { ...astronaut },
+      data: astronaut,
     });
     return newAstronaut;
   } catch (error) {
