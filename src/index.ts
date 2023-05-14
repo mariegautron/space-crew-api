@@ -2,10 +2,16 @@ import http from 'http';
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import { port } from './config';
+import cors from 'cors';
 
 import astronautsRoutes from './routes/astronauts.routes';
 
+import swaggerUi from 'swagger-ui-express'; // use import instead of require
+import swaggerDocument from './swagger.json'; // use import instead of require
+
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,9 +22,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
-
-const swaggerUi = require('swagger-ui-express'),
-  swaggerDocument = require('./swagger.json');
 
 app.use('/astronauts', astronautsRoutes);
 
