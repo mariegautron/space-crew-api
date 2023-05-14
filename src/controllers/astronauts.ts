@@ -3,9 +3,11 @@ import {
   AstronautsPagination,
   addAstronaut,
   deleteAstronaut,
+  getAstronautById,
   getAstronauts,
   updateAstronaut,
 } from '../models/astronauts';
+import { isValidAstronautId } from '../utils/isValidAstronautId';
 import { isValidAstronaut } from '../utils/isValidAstronaut';
 
 export async function getAstronautsController(
@@ -88,5 +90,33 @@ export async function updateAstronautController(req: Request, res: Response): Pr
   } catch (error) {
     console.error(`Failed to update astronaut: ${error}`);
     return res.status(500).json({ error: 'Failed to update astronaut' });
+  }
+}
+
+export async function getAstronautByIdController(req: Request, res: Response): Promise<Response | Error> {
+  const { astronautId } = req.params;
+
+  const astronautIdNumber = Number(astronautId);
+
+  if (!astronautId || isNaN(astronautIdNumber)) {
+    return res.status(400).json({
+      message: `${astronautId} ${isNaN(astronautIdNumber)} ${typeof astronautId}`,
+    });
+  }
+
+  if (!isValidAstronautId(astronautIdNumber)) {
+    return res.status(404).json({ message: `Astronaut with ID ${astronautIdNumber} not found.` });
+  }
+
+  try {
+    const astronaut = await getAstronautById(astronautIdNumber);
+
+    if (astronaut === null) {
+      return res.status(404).json({ message: `Astronaut with ID ${astronautIdNumber} not found.` });
+    }
+
+    return res.status(200).json(astronaut);
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to get astronaut' });
   }
 }

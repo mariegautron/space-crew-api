@@ -226,6 +226,66 @@
             }
           }
         }
+      },
+      "get": {
+        "summary": "Get an astronaut by ID",
+        "tags": ["Astronaut"],
+        "description": "Get an astronaut by its ID",
+        "parameters": [
+          {
+            "name": "astronautId",
+            "in": "path",
+            "description": "ID of the astronaut to retrieve",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An astronaut object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Astronaut"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid astronaut ID provided",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Astronaut not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
