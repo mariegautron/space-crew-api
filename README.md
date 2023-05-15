@@ -12,7 +12,7 @@ Lien du repo front-end : https://github.com/mariegautron/space-crew-front
 
 ## 🚀 Déploiement
 
-L'api NodeJS et la base de données GraphQL sont déployées avec [Render](https://render.com/) à l'adresse suivante : https://space-crew-api.onrender.com/
+L'api NodeJS et la base de données PostgresSQL sont déployées avec [Render](https://render.com/) à l'adresse suivante : https://space-crew-api.onrender.com/
 
 Vous pouvez consulter **la documentation de l'API via l'interface Swagger** en vous rendant sur https://space-crew-api.onrender.com/.
 
